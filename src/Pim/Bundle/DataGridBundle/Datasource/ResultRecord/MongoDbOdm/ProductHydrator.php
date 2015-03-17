@@ -2,6 +2,8 @@
 
 namespace Pim\Bundle\DataGridBundle\Datasource\ResultRecord\MongoDbOdm;
 
+use Doctrine\ODM\MongoDB\Query\Builder;
+use Doctrine\ODM\MongoDB\Query\Query;
 use Oro\Bundle\DataGridBundle\Datasource\ResultRecord;
 use Pim\Bundle\DataGridBundle\Datasource\ResultRecord\HydratorInterface;
 use Pim\Bundle\DataGridBundle\Datasource\ResultRecord\MongoDbOdm\Product\AssociationTransformer;
@@ -21,6 +23,7 @@ use Pim\Bundle\DataGridBundle\Datasource\ResultRecord\MongoDbOdm\Product\ValuesT
 class ProductHydrator implements HydratorInterface
 {
     /**
+     * @param Builder $qb
      * {@inheritdoc}
      */
     public function hydrate($qb, array $options = [])
@@ -32,7 +35,40 @@ class ProductHydrator implements HydratorInterface
         $associationTypeId = $options['association_type_id'];
         $currentProduct    = $options['current_product'];
 
+        /** @var Query $query */
         $query   = $qb->hydrate(false)->getQuery();
+        $queryArray = $query->getQuery();
+
+        $match = $queryArray['query'];
+
+        $collection = $query->getDocumentManager()->getDocumentCollection('Pim\Bundle\CatalogBundle\Model\Product');
+
+        $pipeline = array(
+            array('$match' => $match),
+            array('$project' =>
+                array(
+                    '_id' => 1,
+                    'is_associated' => array(
+                        '$cond' => array(
+                            array('$eq' => array('$_id','5506d5bd8ead0e28408b46d0')),
+                            1,
+                            0
+                        )
+                    )
+                )
+            )
+//            array('$unwind' => '$values'),
+//            array(
+//                '$group'  => array(
+//                    '_id'       => array('id' => '$_id', 'family' => '$family'),
+//                    'attribute' => array( '$addToSet' => '$values.attribute')
+//                )
+//            )
+        );
+
+
+        $foo = $collection->aggregate($pipeline)->toArray();
+
         $results = $query->execute();
 
         $attributes = [];
