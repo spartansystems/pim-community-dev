@@ -62,11 +62,11 @@ class IndexCreator
 
         switch ($attribute->getBackendType()) {
             case "prices":
-                $attributeFields = $this->addFieldsFromPrices($attributeFields, $attribute);
+                $attributeFields = $this->addFieldsFromPrices($attributeFields);
                 break;
             case "option":
             case "options":
-                $attributeFields = $this->addFieldsFromOption($attributeFields, $attribute);
+                $attributeFields = $this->addFieldsFromOption($attributeFields);
                 break;
         }
         $this->ensureIndexes($attributeFields);
@@ -172,6 +172,7 @@ class IndexCreator
     protected function addFieldsFromPrices(array $fields)
     {
         $currencyCodes = $this->namingUtility->getCurrencyCodes();
+        // FIXME JML possible bug
         $updatedFields = $this->namingUtility->appendSuffixes($fields, $currencyCodes, '.');
         $updatedFields = $this->namingUtility->appendSuffixes($fields, ['data'], '.');
 

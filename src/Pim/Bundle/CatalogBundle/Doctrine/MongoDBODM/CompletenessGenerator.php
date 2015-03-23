@@ -375,7 +375,6 @@ class CompletenessGenerator implements CompletenessGeneratorInterface
      */
     protected function getChannelLocaleCombinations(ChannelInterface $channel = null)
     {
-        $channels = array();
         $combinations = array();
 
         if (null !== $channel) {

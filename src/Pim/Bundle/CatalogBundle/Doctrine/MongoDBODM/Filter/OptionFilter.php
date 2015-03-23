@@ -100,7 +100,7 @@ class OptionFilter extends AbstractAttributeFilter implements AttributeFilterInt
             ProductQueryUtility::getNormalizedValueFieldFromAttribute($attribute, $locale, $scope)
         );
 
-        $this->applyFilter($operator, $value, $mongoField, $options);
+        $this->applyFilter($operator, $value, $mongoField);
 
         return $this;
     }

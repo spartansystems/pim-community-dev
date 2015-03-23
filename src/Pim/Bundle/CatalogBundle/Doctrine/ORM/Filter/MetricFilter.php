@@ -96,7 +96,7 @@ class MetricFilter extends AbstractAttributeFilter implements AttributeFilterInt
         $scope = null
     ) {
         $backendType = $attribute->getBackendType();
-        $joinAlias   = $this->getUniqueAlias('filter' . $attribute->getCode(), true);
+        $joinAlias   = $this->getUniqueAlias('filter' . $attribute->getCode());
 
         // inner join to value
         $condition = $this->prepareAttributeJoinCondition($attribute, $joinAlias, $locale, $scope);
@@ -132,7 +132,7 @@ class MetricFilter extends AbstractAttributeFilter implements AttributeFilterInt
         $scope = null
     ) {
         $backendType = $attribute->getBackendType();
-        $joinAlias   = $this->getUniqueAlias('filter' . $attribute->getCode(), true);
+        $joinAlias   = $this->getUniqueAlias('filter' . $attribute->getCode());
 
         // inner join to value
         $condition = $this->prepareAttributeJoinCondition($attribute, $joinAlias, $locale, $scope);
