@@ -50,6 +50,10 @@ class AttributeOptionUpdateGuesser implements UpdateGuesserInterface
     {
         $pendings = [];
 
+        // TODO: disable the guesser which make fail the option import, when create an option, the attribute is marked
+        // as been versionned, flushed and the option already created and detached is re-inserted
+        return $pendings;
+
         if ($entity instanceof AttributeOptionInterface) {
             $pendings[] = $entity->getAttribute();
         } elseif ($entity instanceof AttributeOptionValueInterface) {
