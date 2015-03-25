@@ -4,6 +4,7 @@
 - PIM-2401: Association grid, add the Is associated sorter (MongoDB impl)
 - PIM-3926: Set explicit message for 403 error
 - PIM-3938: Querying products with PQB and using Sorters will not return an ordered Cursor
+- PIM-3931: Remove db query from CsvReader constructor
 
 # 1.3.5 (2015-03-19)
 
