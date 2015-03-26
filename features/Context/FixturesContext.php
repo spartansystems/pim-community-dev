@@ -896,7 +896,9 @@ class FixturesContext extends RawMinkContext
     {
         $attribute = $this->getAttribute(strtolower($attribute));
         foreach ($this->listToArray($options) as $option) {
-            $attribute->addOption($this->createOption($option));
+            $option = $this->createOption($option);
+            $attribute->addOption($option);
+            $this->persist($option);
         }
 
         $this->flush();
