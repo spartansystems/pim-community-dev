@@ -629,7 +629,8 @@ class FixturesContext extends RawMinkContext
                 $optionData[] = [
                     'attribute'   => sprintf($attCodePattern, $i),
                     'code'        => sprintf($optionCodePattern, $i, $j),
-                    'label-en_US' => sprintf($optionLabelPattern, $j, $i)
+                    'label-en_US' => sprintf($optionLabelPattern, $j, $i),
+                    'label-fr_FR' => sprintf($optionLabelPattern, $j, $i)
                 ];
             }
         }
